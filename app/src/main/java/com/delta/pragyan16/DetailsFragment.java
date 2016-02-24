@@ -1,7 +1,9 @@
 package com.delta.pragyan16;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +20,10 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class DetailsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String eventName;
-    private String mParam2;
+    EventInfo eventInfo;
 
     private OnFragmentInteractionListener mListener;
 
@@ -33,7 +31,6 @@ public class DetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static Fragment newInstance(String eventName) {
         DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
@@ -56,26 +53,54 @@ public class DetailsFragment extends Fragment {
         EventsAdapter adapter = new EventsAdapter(getActivity());
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_details, container, false);
-        TextView eventNameView = (TextView) v.findViewById(R.id.detailText);
+        fTextView eventNameView = (fTextView) v.findViewById(R.id.detailText);
         eventNameView.setText(eventName);
-        TextView eventDescription = (TextView) v.findViewById(R.id.descriptionDetail);
-        EventInfo eventInfo = adapter.getEventInfo(eventName);
+        fTextView eventDescription = (fTextView) v.findViewById(R.id.descriptionDetail);
+        eventInfo = adapter.getEventInfo(eventName);
         eventDescription.setText(eventInfo.description);
-//        Button register = (Button) v.findViewById(R.id.eventRegisterButton);
-//        register.setOnClickListener(
+//        Button directions = (Button) v.findViewById(R.id.eventDirectionButton);
+        Button location = (Button) v.findViewById(R.id.eventLocationButton);
+        if(eventInfo.venue.equals("Online")) {
+//            directions.setVisibility(View.GONE);
+            location.setVisibility(View.GONE);
+        }
+//
+//        directions.setOnClickListener(
 //                new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
-//                        //
+//
+////                        Uri gmmIntentUri = Uri.parse("geo:0,0?q="+eventInfo.locy+","+eventInfo.locx+"("+eventInfo.venue+")");
+////                        Log.i("map","geo:"+eventInfo.locy+","+eventInfo.locx);
+////                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+////                        mapIntent.setPackage("com.google.android.apps.maps");
+////                        startActivity(mapIntent);
+//
+//
+//                        Uri gmmIntentUri = Uri.parse("google.navigation:q="+eventInfo.locy+","+eventInfo.locx+"&mode=w");
+//                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                        mapIntent.setPackage("com.google.android.apps.maps");
+//                        startActivity(mapIntent);
 //                    }
 //                }
 //        );
+        location.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+
+                        Uri gmmIntentUri = Uri.parse("geo:0,0?q="+eventInfo.locy+","+eventInfo.locx+"("+eventInfo.venue+")");
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);
+
+        }
+        });
 
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    // Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -99,7 +124,7 @@ public class DetailsFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+        // Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

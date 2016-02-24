@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
+            <com.delta.pragyan16.fTextView
                 android:id="@+id/detailText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
-            <TextView
+            <com.delta.pragyan16.fTextView
                 android:id="@+id/descriptionDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,5 +39,14 @@
         </RelativeLayout>
 
     </ScrollView>
+        <Button
+            android:id="@+id/eventLocationButton"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:background="#3f85f4"
+            android:textColor="#ffffff"
+            android:text="Location"/>
+
 
 </LinearLayout>

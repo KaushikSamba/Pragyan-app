@@ -1,6 +1,7 @@
 package com.delta.pragyan16;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +44,6 @@ public class UpcomingActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
 
-    String url = "http://api.pragyan.org/events/list";//"https://api.festember.com/events/list";
     String noentrytest="No ongoing/upcoming events.\nWhy not visit the FOODSTALLS instead?";  //default text for when no event in list
 
     //new data for dynamic spinnerviews
@@ -53,7 +53,6 @@ public class UpcomingActivity extends AppCompatActivity {
     Spinner spinner ;
     Spinner spinnertime;
     Spinner spinnercate;
-    String[] items,itemscate;
     ArrayAdapter<String> spadapter;
     ArrayAdapter<String> caadapter;
 
@@ -497,6 +496,7 @@ public class UpcomingActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(UpcomingActivity.this,Notify.class));
             return true;
         }
 

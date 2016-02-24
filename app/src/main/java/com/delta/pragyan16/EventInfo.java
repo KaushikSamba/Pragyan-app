@@ -8,4 +8,7 @@ public class EventInfo {
     String name, start_time, end_time, venue, date;
     String cluster, last_update_time;
     String description;
+    String contact_name = "";
+    String locx,locy;
+    String contact_no = "";
 }
